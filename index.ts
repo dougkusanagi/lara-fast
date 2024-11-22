@@ -78,7 +78,7 @@ function installer() {
 async function main(args: string[] = []) {
 	needHelp(args);
 	hasName(args);
-	checkLaravelInstaller();
+	await checkLaravelInstaller();
 
 	const projectName = args[0];
 

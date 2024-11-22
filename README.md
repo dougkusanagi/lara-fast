@@ -1,15 +1,24 @@
 # laravel-preconfig
 
-To install dependencies:
+A very opinionated Laravel setup script that will create a laravel project. Comes with:
+
+- Git
+- Tailwind (Livewire)
+- Breeze
+- Pest
+- Telescope
+- Pulse
+- Laradumps
+- Laravel Debugbar
+
+## Install
 
 ```bash
-bun install
+bun add -g lara-fast
 ```
 
-To run:
+## Usage
 
 ```bash
-bun run index.ts
+lara-fast <project-name>
 ```
-
-This project was created using `bun init` in bun v1.1.36. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.

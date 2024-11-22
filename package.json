@@ -1,0 +1,26 @@
+{
+  "name": "lara-fast",
+  "module": "index.ts",
+  "type": "module",
+  "version": "0.0.2",
+  "description": "A very opinionated Laravel setup script that will create a laravel project.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dougkusanagi/lara-fast"
+  },
+  "author": {
+    "name": "Douglas Lopes",
+    "email": "dl.aguiar@yahoo.com.br",
+    "url": "https://github.com/dougkusanagi"
+  },
+  "bin": {
+    "lara-fast": "index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

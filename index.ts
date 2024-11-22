@@ -41,13 +41,13 @@ function hasName(args: string[]) {
 async function checkLaravelInstaller() {
 	if (!which("laravel")) {
 		console.error("Error: Laravel Installer not found");
-		console.log("Installing Laravel Installer...");
+		console.log("🚀 Installing laravel/installer...");
 		await $`composer global require laravel/installer`;
 	}
 }
 
 async function createLaravelProject(projectName: string) {
-	await $`laravel new --git --breeze --stack=livewire --dark --pest -n ${projectName}`;
+	await $`laravel new --git --breeze --stack=livewire --dark --pest -n -q ${projectName}`;
 }
 
 function installer() {
@@ -89,7 +89,7 @@ async function main(args: string[] = []) {
 	const installers = installer();
 
 	for (const [key, value] of Object.entries(installers)) {
-		console.log(`🚀Installing ${key}...`);
+		console.log(`🚀 Installing ${key}...`);
 		await value();
 	}
 }

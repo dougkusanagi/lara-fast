@@ -82,7 +82,7 @@ async function main(args: string[] = []) {
 
 	const projectName = args[0];
 
-	createLaravelProject(projectName);
+	await createLaravelProject(projectName);
 
 	$.cwd(projectName);
 

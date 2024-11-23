@@ -17,7 +17,8 @@ Packages:
 
 ## Requirements
 
-- PHP
+- PHP 8.1+
+- Bun
 - Composer
 
 ## Install

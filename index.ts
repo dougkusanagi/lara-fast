@@ -75,22 +75,25 @@ function hasName(args: string[]) {
 
 async function checkLaravelInstaller() {
 	if (!which("laravel")) {
-		console.error("🚧 Laravel Installer not found.");
+		console.error("🚧 Laravel Installer not found.\n");
 		console.log("🚀 Installing laravel/installer...");
 
 		await installers.laravel();
 
-		console.log("✅ Done!");
+		console.log("✅ Done!\n");
 	}
 }
 
 async function createLaravelProject(projectName: string) {
+	console.log(`🚀 Creating Laravel project ${projectName}...`);
 	await $`laravel new --git --breeze --stack=livewire --dark --pest -n -q ${projectName}`;
+	console.log("✅ Done!\n");
 }
 
 async function main(args: string[] = []) {
 	needHelp(args);
 	hasName(args);
+
 	await checkLaravelInstaller();
 
 	const projectName = args[0];
@@ -102,7 +105,7 @@ async function main(args: string[] = []) {
 	for (const [key, value] of Object.entries(installers.packages)) {
 		console.log(`🚀 Installing ${key}...`);
 		await value();
-		console.log("✅ Done!");
+		console.log("✅ Done!\n");
 	}
 
 	console.log("🎉 Project created successfully!");

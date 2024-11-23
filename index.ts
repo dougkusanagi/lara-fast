@@ -2,6 +2,41 @@
 
 import { $, which } from "bun";
 
+const installers = getInstallers();
+
+export function getInstallers() {
+	const laravel = async () =>
+		await $`composer global require -q laravel/installer`;
+
+	const packages = {
+		"Laravel Telescope": async () => {
+			await $`composer require -q laravel/telescope`;
+			await $`php artisan -q telescope:install;`;
+			await $`php artisan -q migrate`;
+		},
+
+		"Laravel Pulse": async () => {
+			await $`composer require -q laravel/pulse`;
+			await $`php artisan -q vendor:publish --provider="Laravel\\Pulse\\PulseServiceProvider`;
+			await $`php artisan -q migrate`;
+		},
+
+		Laradumps: async () => {
+			await $`composer require -q laradumps/laradumps`;
+			await $`php artisan -q ds:init $(pwd)`;
+		},
+
+		Debugbar: async () => {
+			await $`composer require -q barryvdh/laravel-debugbar --dev`;
+		},
+	};
+
+	return {
+		packages,
+		laravel,
+	};
+}
+
 function help() {
 	console.log(`
   LaraFast is a very opinionated Laravel setup script that will create a laravel project.
@@ -40,39 +75,17 @@ function hasName(args: string[]) {
 
 async function checkLaravelInstaller() {
 	if (!which("laravel")) {
-		console.error("Error: Laravel Installer not found");
+		console.error("🚧 Laravel Installer not found.");
 		console.log("🚀 Installing laravel/installer...");
-		await $`composer global require laravel/installer`;
+
+		await installers.laravel();
+
+		console.log("✅ Done!");
 	}
 }
 
 async function createLaravelProject(projectName: string) {
 	await $`laravel new --git --breeze --stack=livewire --dark --pest -n -q ${projectName}`;
-}
-
-function installer() {
-	return {
-		telescope: async () => {
-			await $`composer require laravel/telescope`;
-			await $`php artisan telescope:install;`;
-			await $`php artisan migrate`;
-		},
-
-		pulse: async () => {
-			await $`composer require laravel/pulse`;
-			await $`php artisan vendor:publish --provider="Laravel\\Pulse\\PulseServiceProvider`;
-			await $`php artisan migrate`;
-		},
-
-		laradumps: async () => {
-			await $`composer require laradumps/laradumps`;
-			await $`php artisan ds:init $(pwd)`;
-		},
-
-		debugbar: async () => {
-			await $`composer require barryvdh/laravel-debugbar --dev`;
-		},
-	};
 }
 
 async function main(args: string[] = []) {
@@ -86,12 +99,13 @@ async function main(args: string[] = []) {
 
 	$.cwd(projectName);
 
-	const installers = installer();
-
-	for (const [key, value] of Object.entries(installers)) {
+	for (const [key, value] of Object.entries(installers.packages)) {
 		console.log(`🚀 Installing ${key}...`);
 		await value();
+		console.log("✅ Done!");
 	}
+
+	console.log("🎉 Project created successfully!");
 }
 
 main(Bun.argv.slice(2));

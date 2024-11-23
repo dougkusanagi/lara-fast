@@ -29,6 +29,11 @@ export function getInstallers() {
 		Debugbar: async () => {
 			await $`composer require -q barryvdh/laravel-debugbar --dev`;
 		},
+
+		"Livewire Toaster": async () => {
+			await $`composer require -q masmerise/livewire-toaster`;
+			await $`php artisan -q vendor:publish --tag=toaster-config`;
+		},
 	};
 
 	return {
@@ -49,6 +54,7 @@ function help() {
     -Pulse
     -Laradumps
     -Laravel Debugbar
+	-Livewire Toaster
 
   Usage: lara-fast <project-name>`);
 }

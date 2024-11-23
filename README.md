@@ -1,15 +1,24 @@
 # laravel-preconfig
 
-A very opinionated Laravel setup script that will create a laravel project. Comes with:
+LaraFast is a very opinionated Laravel setup script that will create a laravel project.
+
+Configs:
 
 - Git
-- Tailwind (Livewire)
-- Breeze
+- Breeze (Livewire)
 - Pest
+
+Packages:
 - Telescope
 - Pulse
 - Laradumps
 - Laravel Debugbar
+- Livewire Toaster
+
+## Requirements
+
+- PHP
+- Composer
 
 ## Install
 
